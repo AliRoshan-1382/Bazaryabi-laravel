@@ -246,7 +246,7 @@
                             <span>Reports</span>
                         </a>
                         <ul class="sub-menu ">
-                            <li><a href="table-basic.html" class="link"><span>Supporers Table</span></a></li>
+                            <li><a href="table-basic.html" class="link"><span>Customers Report</span></a></li>
                         </ul>
                     </li>
 
@@ -373,20 +373,20 @@
         <div class="row same-height">
             <div class="col-md-4">
                 <div class="card">
-                    <!-- <div class="float-label">
+                    <div class="float-label">
                         <h6>Sales</h6>
                         <h4>$1500</h4>
-                    </div> -->
+                    </div>
                     <div class="card-body">
                         <div id="apex-chart"></div>
                     </div>
                 </div>
                 <br>
                 <div class="card">
-                    <!-- <div class="float-label">
+                     <div class="float-label">
                         <h6>Profit</h6>
                         <h4>$500</h4>
-                    </div> -->
+                    </div> 
                     <span></span>
 
                     <div class="card-body">
@@ -745,7 +745,7 @@
         </div> 
 
         <footer>
-            Copyright © 2022 &nbsp <a href="https://www.youtube.com/c/mulaidarinull" target="_blank" class="ml-1"> Mulai Dari Null </a> <span> . All rights Reserved</span>
+            You Can See My Work In &nbsp <a href="https://github.com/AliRoshan-1382/" target="_blank" class="ml-1"> My Github </a>
         </footer>
         <div class="overlay action-toggle">
         </div>
