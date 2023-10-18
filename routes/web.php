@@ -13,5 +13,11 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [AdminController::class, 'dashboard']); // اد کردن
+Route::get('/', [AdminController::class, 'login'])->name(''); // داشبورد 
+Route::post('/login', [AdminController::class, 'AuthLogin'])->name('login'); // لاگین
+Route::get('/logout', [AdminController::class, 'logout']); // لاگ اوت کردن ادمن
+Route::get('Admin/dashboard', [AdminController::class, 'Dashboard']); // داشبورد
+
+
+
 

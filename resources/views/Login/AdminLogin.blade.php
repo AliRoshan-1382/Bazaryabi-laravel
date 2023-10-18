@@ -1,76 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
-        crossorigin="anonymous" />
-
-
-    <link rel="stylesheet" href="{{ url('public/vendor/bootstrap/css/bootstrap.min.css') }} ">
-
-    <link rel="stylesheet" href="{{ url('public/assets/css/style.css') }} ">
-    <!-- <link rel="stylesheet" href="../vendor/themify-icons/themify-icons.css"> -->
-    <link rel="stylesheet" href="{{ url('public/assets/css/bootstrap-override.css') }} ">
-
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Dompet : Payment Admin Template" />
+	<meta property="og:title" content="Dompet : Payment Admin Template" />
+	<meta property="og:description" content="Dompet : Payment Admin Template" />
+	<meta property="og:image" content="https://dompet.dexignlab.com/xhtml/social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+	<title>Dompet : Payment Admin Template</title>
+	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
+    <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
 
 </head>
 
-<body>
-<section class="container h-100">
-    <div class="row justify-content-sm-center h-100 align-items-center">
-        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
-            <div class="card shadow-lg">
-                <div class="card-body p-4">
-                    <h1 class="fs-4 text-center fw-bold mb-4">Admin Login</h1>
-                    <h1 class="fs-6 mb-3">Please enter your email and password to log in.</h1>
-                    <form method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate=""
-                        autocomplete="off" action="{{ url('') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="mb-2 text-muted" for="email">E-Mail Address</label>
-                            <div class="input-group input-group-join mb-3">
-                                <input id="email" type="email" placeholder="Enter Email" class="form-control"
-                                    name="email" value="" required autofocus>
-                                    <span class="input-group-text rounded-end">&nbsp<i class="fa fa-envelope"></i>&nbsp</span>
-                                <div class="invalid-feedback">
-                                    Email is invalid
+<body class="vh-100">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+									<div class="text-center mb-3">
+										<a href="{{ url('') }}"><img src="{{ url('public/images/logo-full.png') }}" alt=""></a>
+									</div>
+                                    @include('message')
+                                    <h4 class="text-center mb-4">Sign in your account</h4>
+                                    <form action="{{ url('login') }}" method="post">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Email</strong></label>
+                                            <input type="email" name="email" placeholder="Email" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Password</strong></label>
+                                            <input type="password" name="password" placeholder="Password" class="form-control" required>
+                                        </div>
+                                        <div class="row d-flex justify-content-between mt-4 mb-2">
+                                            <div class="mb-3">
+                                               <div class="form-check custom-checkbox ms-1">
+													<input type="checkbox" name="remember" class="form-check-input" id="basic_checkbox_1">
+													<label class="form-check-label" for="basic_checkbox_1">Remember my preference</label>
+												</div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <div class="mb-2 w-100">
-                                <label class="text-muted" for="password">Password</label>
-                            </div>
-                            <div class="input-group input-group-join mb-3">
-                                <input type="password" class="form-control" placeholder="Your password" required>
-                                <span class="input-group-text rounded-end password cursor-pointer">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
-                                <div class="invalid-feedback">
-                                    Password required
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <div class="form-check">
-                                <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                                <label for="remember" class="form-check-label">Remember Me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary ms-auto">
-                                Login
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
-<script src="{{ url('public/assets/js/login.js') }}"></script>
+
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="{{ url('public/vendor/global/global.min.js') }}"></script>
+    <script src="{{ url('public/js/custom.min.js') }}"></script>
+    <script src="{{ url('public/js/dlabnav-init.js') }}"></script>
+	
 </body>
 </html>
