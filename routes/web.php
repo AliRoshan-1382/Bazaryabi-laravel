@@ -13,10 +13,17 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [AdminController::class, 'login'])->name(''); // داشبورد 
-Route::post('/login', [AdminController::class, 'AuthLogin'])->name('login'); // لاگین
+Route::get('/', [AdminController::class, 'login']); // داشبورد 
+Route::post('/login', [AdminController::class, 'AuthLogin']); // لاگین
 Route::get('/logout', [AdminController::class, 'logout']); // لاگ اوت کردن ادمن
-Route::get('Admin/dashboard', [AdminController::class, 'Dashboard']); // داشبورد
+
+Route::group(['middleware' => 'admin'], function(){
+        Route::get('Admin/dashboard', [AdminController::class, 'Dashboard']); // داشبورد
+        Route::get('Admin/AddSupporter', [AdminController::class, 'SupporterForm']); // فرم ثبت پشتیبان
+        
+    ;}
+);
+
 
 
 
