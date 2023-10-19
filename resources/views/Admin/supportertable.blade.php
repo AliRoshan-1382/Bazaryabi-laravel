@@ -774,7 +774,11 @@
 				<ul class="metismenu" id="menu">
 					<li class="dropdown header-profile">
 						<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-							<img src="{{ url('public/pictures/'. $user['picture']) }}" width="20" alt=""/>
+							@if ($user['picture'] == '')
+								<img src="{{ url('public/images/profile/pic1.jpg') }}" width="20" alt=""/>
+							@else
+								<img src="{{ url('public/pictures/'. $user['picture']) }}" width="20" alt=""/>
+							@endif
 							<div class="header-info ms-3">
 								<span class="font-w600 ">سلام,<b>{{ $user['name'] }}</b></span>
 								<small class="text-end font-w400">{{ $user['email'] }}</small>
@@ -871,17 +875,31 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($Supporters as $Supporter)
-                                                <tr>
-                                                    <td>{{$Supporter->id}}</td>
-                                                    <td>{{$Supporter->name}}</td>
-                                                    <td>{{$Supporter->email}}</td>
-                                                    <td>{{$Supporter->access}}</td>
-                                                    <td>
-                                                        <div class="d-flex">
-                                                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+												@if ($Supporter->access == 'on')
+													<tr>
+														<td>{{$Supporter->id}}</td>
+														<td>{{$Supporter->name}}</td>
+														<td>{{$Supporter->email}}</td>
+														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-primary">on</a></td>
+														<td>
+															<div class="d-flex">
+																<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+															</div>
+														</td>
+													</tr>
+												@else
+													<tr>
+														<td>{{$Supporter->id}}</td>
+														<td>{{$Supporter->name}}</td>
+														<td>{{$Supporter->email}}</td>
+														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-danger">of</a></td>
+														<td>
+															<div class="d-flex">
+																<a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+															</div>
+														</td>
+													</tr>
+												@endif
                                             @endforeach
                                         </tbody>
                                     </table>

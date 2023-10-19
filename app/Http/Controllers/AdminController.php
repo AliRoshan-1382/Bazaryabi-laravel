@@ -67,7 +67,7 @@ class AdminController extends Controller
             $data['status'] = true;
             $data['message'] = 'پشتیبان با موفقیت ثبت شد';
 
-            $data['url'] = '';
+            $data['url'] = 'Admin/supportertable';
         } 
         else {
             $data['message'] = 'کاربر با این ایمیل در سامانه وجود دارد';

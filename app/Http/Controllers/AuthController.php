@@ -18,7 +18,7 @@ class AuthController extends Controller
                 return redirect('Supporter/dashboard');
             }    
         }
-        return view('Login.Adminlogin'); 
+        return view('Login.login'); 
     }
     public function AuthLogin(Request $request)
     {

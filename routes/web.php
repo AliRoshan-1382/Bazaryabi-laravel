@@ -33,8 +33,6 @@ Route::group(['middleware' => 'admin'], function(){
 
 Route::group(['middleware' => 'supporter'], function () {
     Route::get('Supporter/dashboard', [SupporterController::class, 'Dashboard']); // داشبورد
-    // Route::get('Admin/SupporterForm', [AdminController::class, 'SupporterForm']); // فرم ثبت پشتیبان
-    // Route::post('Admin/AddSupporter', [AdminController::class, 'AddSupporter']); // فرم ثبت پشتیبان
     ;}
 );
 
