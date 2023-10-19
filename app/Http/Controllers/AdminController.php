@@ -5,47 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use Hash;
 class AdminController extends Controller
 {
-    public function login(){
-        if (!empty(Auth::check())) 
-        {
-            if (Auth::user()->user_type == 1) 
-            {            
-                return redirect('Admin/dashboard');
-            }
-            else if (Auth::user()->user_type == 2) 
-            {
-                return redirect('Supporter/dashboard');
-            }    
-        }
-        return view('Login.Adminlogin'); 
-    }
-    public function AuthLogin(Request $request){
-        $remember = !empty($request->remember) ? true : false;
-        if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password], $remember)) //ریممبر برای یادآوری شخص هستش
-        { //  اگر ریممبر فعال بود سشن کاربر رو سیو میکنه
-            if (Auth::user()->user_type == 1) 
-            {            
-                return redirect('Admin/dashboard');
-            }
-            else if (Auth::user()->user_type == 2) 
-            {
-                return redirect('Supporter/dashboard');
-            }
-        }
-        else 
-        {
-            return redirect()->back()->with('error', 'please enter currect email and password');
-        }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect(url(''));
-    }
-
     public function adminDetail()
     {
         $user["id"] = Auth::user()->id; 
@@ -66,6 +28,59 @@ class AdminController extends Controller
         $user = $this->adminDetail();
 
         return view('Admin.supporterform', compact('user'));
+    }
+
+    public function AddSupporter(Request $request){
+        $email = $request->email;
+        $count = User::where('email', $email)->count();
+
+        if ($count == 0) {
+            $imageName = '';
+            if (!is_null($request->picture)) {
+                $request->validate([
+                    'image' => 'mimes:jpeg,jpg,png,gif|max:50000',
+                ]);
+                $imageName = 'S' . time() . '.' . $request->picture->extension();
+                $request->picture->move(public_path('pictures'), $imageName);
+            }
+            if (empty($request->access)) 
+            {
+                $access = 'of';
+            }
+            else 
+            {
+                $access = $request->access;
+            }
+
+            $Supporter = new User;
+            $Supporter->Pic_location = $imageName;
+            $Supporter->name = $request->name;
+            $Supporter->access = $access;
+            $Supporter->user_type = 2;
+            $Supporter->email = $request->email;
+
+            $Supporter->password = Hash::make($request->password);
+
+            $Supporter->save();
+
+            $data['status'] = true;
+            $data['message'] = 'پشتیبان با موفقیت ثبت شد';
+
+            $data['url'] = '';
+        } 
+        else {
+            $data['message'] = 'کاربر با این ایمیل در سامانه وجود دارد';
+
+            return redirect()->back()->with('error', 'کاربر با این ایمیل در سامانه وجود دارد');
+        }
+        return view('erorr-success.index', $data);
+    }
+
+    public function supportertable(){
+        $user = $this->adminDetail();
+        $Supporters = User::where('user_type', 2)->get();
+
+        return view('Admin.supportertable', compact('user', 'Supporters'));
     }
 
 }

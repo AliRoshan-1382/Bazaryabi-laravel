@@ -15,7 +15,7 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Admin Dashboard</title>
+	<title>Supporter Dashboard</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
@@ -591,7 +591,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                داشبورد ادمین 
+                                داشبورد پشتیبان 
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -786,7 +786,9 @@
 							<span class="nav-text">فرم ها</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url('Admin/SupporterForm') }}">فرم ثبت پشتیبان</a></li>
+                            <li><a href="{{ url('') }}">فرم ثبت فروشگاه ها</a></li>
+                            <li><a href="{{ url('') }}">فرم ثبت محصولات</a></li>
+                            <li><a href="{{ url('') }}">فرم ثبت مشتریان</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -794,13 +796,11 @@
 							<span class="nav-text">جداول</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
                             <li><a href="table-datatable-basic.html">مغازه دار ها</a></li>
                             <li><a href="table-datatable-basic.html">مشتریان</a></li>
                             <li><a href="table-datatable-basic.html">محصولات</a></li>
                         </ul>
                     </li>
-
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-022-copy"></i>
 							<span class="nav-text">گزارش ها</span>
@@ -820,7 +820,6 @@
                             <li><a href="{{ url('') }}">تیکت های خوانده شده</a></li>
                         </ul>
                     </li>
-
                 </ul>
 				<div class="copyright">
 					<p><strong>This Project Made with <a href="https://github.com/AliRoshan-1382">Ali Roshan</a></strong></p>
