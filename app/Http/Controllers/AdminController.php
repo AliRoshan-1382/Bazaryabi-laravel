@@ -13,6 +13,7 @@ class AdminController extends Controller
         $user["id"] = Auth::user()->id; 
         $user["name"] = Auth::user()->name; 
         $user["email"] = Auth::user()->email; 
+        $user["picture"] = Auth::user()->Pic_location;
 
         return $user;
     }
