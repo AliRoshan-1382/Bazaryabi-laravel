@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Shop;
 use Hash;
 class AdminController extends Controller
 {
@@ -84,4 +85,21 @@ class AdminController extends Controller
         return view('Admin.supportertable', compact('user', 'Supporters'));
     }
 
+    public function shoptable()
+    {
+        $user = $this->adminDetail();
+        $shops = Shop::all();
+
+        return view('Admin.shoptable', compact('user', 'shops'));
+    }
+
+    public function updateSupporter(Request $request)
+    {
+
+    }
+
+    public function updateShop(Request $request)
+    {
+        
+    }
 }

@@ -790,7 +790,7 @@
 							<span class="nav-text">فرم ها</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url('') }}">فرم ثبت فروشگاه ها</a></li>
+                            <li><a href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
                             <li><a href="{{ url('') }}">فرم ثبت محصولات</a></li>
                             <li><a href="{{ url('') }}">فرم ثبت مشتریان</a></li>
                         </ul>
@@ -800,7 +800,7 @@
 							<span class="nav-text">جداول</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="table-datatable-basic.html">مغازه دار ها</a></li>
+                            <li><a href="{{ url('Supporter/shoptable') }}">فروشگاه ها</a></li>
                             <li><a href="table-datatable-basic.html">مشتریان</a></li>
                             <li><a href="table-datatable-basic.html">محصولات</a></li>
                         </ul>

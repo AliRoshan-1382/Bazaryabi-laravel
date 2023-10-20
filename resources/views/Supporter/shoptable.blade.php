@@ -599,7 +599,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-								فروشگاه ها
+                                فروشگاه ها                            
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -804,7 +804,9 @@
 							<span class="nav-text">فرم ها</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url('Admin/SupporterForm') }}">فرم ثبت پشتیبان</a></li>
+                            <li><a href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
+                            <li><a href="{{ url('Admin/SupporterForm') }}">فرم ثبت محصولات</a></li>
+                            <li><a href="{{ url('Admin/SupporterForm') }}">فرم ثبت مشتریان</a></li>
                         </ul>
                     </li>
 
@@ -813,8 +815,7 @@
                         <span class="nav-text">جداول</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a class="mm-active" href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
-                        <li><a href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
+                        <li><a class="mm-active" href="{{ url('Supporter/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="table-datatable-basic.html">مشتریان</a></li>
                         <li><a href="table-datatable-basic.html">محصولات</a></li>
                     </ul>
@@ -826,6 +827,17 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="./page-login.html">عملکرد مشتریان</a></li>
+                    </ul>
+                    </li>
+
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-022-copy"></i>
+                        <span class="nav-text">تیکت</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./page-login.html">کل تیکت ها</a></li>
+                        <li><a href="./page-login.html">تیکت های خوانده نشده</a></li>
+                        <li><a href="./page-login.html">تیکت های خوانده شده</a></li>
                     </ul>
                     </li>
 
@@ -843,13 +855,13 @@
         <!--**********************************
             Content body start
         ***********************************-->
-              <div class="content-body">
+    <div class="content-body">
             <div class="container-fluid">
 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">جداول</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">پشتیبان ها</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">فروشگاه ها</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -867,163 +879,25 @@
                                         <thead>
                                             <tr>
                                                 <th>شماره</th>
-                                                <th>نام</th>
-                                                <th>ایمیل</th>
-                                                <th>دسترسی</th>
+                                                <th>نام فروشگاه</th>
+                                                <th>ایمیل فروشگاه</th>
+                                                <th>شماره فروشگاه</th>
                                                 <th>عملیات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($Supporters as $Supporter)
-												@if ($Supporter->access === 'on')
-													<tr>
-														<td>{{$Supporter->id}}</td>
-														<td>{{$Supporter->name}}</td>
-														<td>{{$Supporter->email}}</td>
-														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-primary">on</a></td>
-
-														<td>
-															<div class="d-flex">
-																<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-pencil"></i></button>
-																<div class="modal fade" id="basicModal">
-																	<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title">ویرایش پشتیبان</h5>
-																				<button type="button" class="btn-close" data-bs-dismiss="modal">
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<div class="col-xl-12 col-lg-12">
-																					<div class="card-body">
-																						<div class="basic-form">
-																							@include('message')
-																							<form action="{{ url('Admin/updateSupporter') }}" method="POST" enctype="multipart/form-data">
-																								@csrf
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">شماره</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="id" id="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
-																									</div>
-																								</div>
-
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">نام</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="name" id="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">ایمیل</label>
-																									<div class="col-sm-9">
-																										<input type="email" name="email" id="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
-																									</div>
-																								</div>
-																								
-																								<div class="mb-3 row">
-																									<div class="col-sm-3">دسترسی</div>
-																									<div class="col-sm-9">
-																										<div class="col-xl-4 col-xxl-6 col-6">
-																											<div class="form-check custom-checkbox mb-3 checkbox-warning">
-																												<input type="checkbox" name="access" id="access" class="form-check-input" checked>																											
-																												<label class="form-check-label" for="customCheckBox5"></label>
-																											</div>
-																										</div>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<div class="col-sm-10">
-																										<button type="submit" class="btn btn-primary">ثبت</button>
-																									</div>
-																								</div>
-																							</form>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-												@else
-													<tr>
-														<td>{{$Supporter->id}}</td>
-														<td>{{$Supporter->name}}</td>
-														<td>{{$Supporter->email}}</td>
-
-														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-danger">of</a></td>
-														<td>
-															<div class="d-flex">
-																<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-pencil"></i></button>
-																<div class="modal fade" id="basicModal">
-																	<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title">ویرایش پشتیبان</h5>
-																				<button type="button" class="btn-close" data-bs-dismiss="modal">
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<div class="col-xl-12 col-lg-12">
-																					<div class="card-body">
-																						<div class="basic-form">
-																							@include('message')
-																							<form action="{{ url('Admin/updateSupporter') }}" method="POST" enctype="multipart/form-data">
-																								@csrf
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">شماره</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="id" id="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
-																									</div>
-																								</div>
-
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">نام</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="name" id="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">ایمیل</label>
-																									<div class="col-sm-9">
-																										<input type="email" name="email" id="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
-																									</div>
-																								</div>
-																								
-																								<div class="mb-3 row">
-																									<div class="col-sm-3">دسترسی</div>
-																									<div class="col-sm-9">
-																										<div class="col-xl-4 col-xxl-6 col-6">
-																											<div class="form-check custom-checkbox mb-3 checkbox-warning">
-																												<input type="checkbox" name="access" id="access" class="form-check-input">
-																												<label class="form-check-label" for="customCheckBox5"></label>
-																											</div>
-																										</div>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<div class="col-sm-10">
-																										<button type="submit" class="btn btn-primary">ثبت</button>
-																									</div>
-																								</div>
-																							</form>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-												@endif
+                                            @foreach ($shops as $shop)
+                                                <tr>
+                                                    <td>{{$shop->id}}</td>
+                                                    <td>{{$shop->shop_name}}</td>
+                                                    <td>{{$shop->shop_email}}</td>
+                                                    <td>{{$shop->shop_number}}</td>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

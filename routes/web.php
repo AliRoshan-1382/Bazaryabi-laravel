@@ -25,7 +25,10 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('Admin/dashboard', [AdminController::class, 'Dashboard']); // داشبورد
         Route::get('Admin/SupporterForm', [AdminController::class, 'SupporterForm']); // فرم ثبت پشتیبان
         Route::post('Admin/AddSupporter', [AdminController::class, 'AddSupporter']); // ثبت پشتیبان
-        Route::get('Admin/supportertable', [AdminController::class, 'supportertable']); // ثبت پشتیبان
+        Route::get('Admin/supportertable', [AdminController::class, 'supportertable']); //  جدول پشتیبان ها
+        Route::get('Admin/shoptable', [AdminController::class, 'shoptable']); //  جدول فروشگاه ها
+        Route::post('Admin/updateSupporter', [AdminController::class, 'updateSupporter']); //  آپدیت پشتیبان
+        Route::post('Admin/updateShop', [AdminController::class, 'updateShop']); //   آپدیت فروشگاه ها
 
     ;}
 );
@@ -33,6 +36,9 @@ Route::group(['middleware' => 'admin'], function(){
 
 Route::group(['middleware' => 'supporter'], function () {
     Route::get('Supporter/dashboard', [SupporterController::class, 'Dashboard']); // داشبورد
+    Route::get('Supporter/shopForm', [SupporterController::class, 'shopForm']); // فرم فروشگاه ها
+    Route::post('Supporter/shopAdd', [SupporterController::class, 'shopAdd']); // ثبت فروشگاه ها
+    Route::get('Supporter/shoptable', [SupporterController::class, 'shoptable']); // جدول فروشگاه ها
     ;}
 );
 

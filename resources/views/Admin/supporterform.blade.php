@@ -809,7 +809,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
-                        <li><a href="table-datatable-basic.html">مغازه دار ها</a></li>
+                        <li><a href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="table-datatable-basic.html">مشتریان</a></li>
                         <li><a href="table-datatable-basic.html">محصولات</a></li>
                     </ul>
@@ -907,7 +907,7 @@
 
                                         <div class="mb-3 row">
                                             <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                                <button type="submit" class="btn btn-primary">ثبت</button>
                                             </div>
                                         </div>
                                     </form>
