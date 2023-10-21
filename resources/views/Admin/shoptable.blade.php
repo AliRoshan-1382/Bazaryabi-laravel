@@ -816,7 +816,6 @@
                         <li><a href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
                         <li><a class="mm-active" href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="table-datatable-basic.html">مشتریان</a></li>
-                        <li><a href="table-datatable-basic.html">محصولات</a></li>
                     </ul>
                     </li>
 

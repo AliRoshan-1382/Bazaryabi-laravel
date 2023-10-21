@@ -816,7 +816,6 @@
                         <li><a class="mm-active" href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
                         <li><a href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="table-datatable-basic.html">مشتریان</a></li>
-                        <li><a href="table-datatable-basic.html">محصولات</a></li>
                     </ul>
                     </li>
 
@@ -875,17 +874,20 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($Supporters as $Supporter)
-												@if ($Supporter->access === 'on')
 													<tr>
 														<td>{{$Supporter->id}}</td>
 														<td>{{$Supporter->name}}</td>
 														<td>{{$Supporter->email}}</td>
-														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-primary">on</a></td>
+														@if ($Supporter->access == 'on')
+															<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-primary">on</a></td>
+														@else
+															<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-danger">of</a></td>
+														@endif
 
 														<td>
 															<div class="d-flex">
-																<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-pencil"></i></button>
-																<div class="modal fade" id="basicModal">
+																<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="{{ '#' . explode('@', $Supporter->email)[0]}} "><i class="fa fa-pencil"></i></button>
+																<div class="modal fade" id="{{ explode('@', $Supporter->email)[0] }}">
 																	<div class="modal-dialog" role="document">
 																		<div class="modal-content">
 																			<div class="modal-header">
@@ -897,41 +899,54 @@
 																				<div class="col-xl-12 col-lg-12">
 																					<div class="card-body">
 																						<div class="basic-form">
-																							@include('message')
-																							<form action="{{ url('Admin/updateSupporter') }}" method="POST" enctype="multipart/form-data">
+																							<form action="{{ url('Admin/updateSupporter') }}" method="POST">
 																								@csrf
 																								<div class="mb-3 row">
 																									<label class="col-sm-3 col-form-label">شماره</label>
 																									<div class="col-sm-9">
-																										<input type="text" name="id" id="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
+																										<input type="text" name="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
 																									</div>
 																								</div>
 
 																								<div class="mb-3 row">
 																									<label class="col-sm-3 col-form-label">نام</label>
 																									<div class="col-sm-9">
-																										<input type="text" name="name" id="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
+																										<input type="text" name="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
 																									</div>
 																								</div>
 														
 																								<div class="mb-3 row">
 																									<label class="col-sm-3 col-form-label">ایمیل</label>
 																									<div class="col-sm-9">
-																										<input type="email" name="email" id="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
+																										<input type="email" name="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
 																									</div>
 																								</div>
 																								
-																								<div class="mb-3 row">
-																									<div class="col-sm-3">دسترسی</div>
-																									<div class="col-sm-9">
-																										<div class="col-xl-4 col-xxl-6 col-6">
-																											<div class="form-check custom-checkbox mb-3 checkbox-warning">
-																												<input type="checkbox" name="access" id="access" class="form-check-input" checked>																											
-																												<label class="form-check-label" for="customCheckBox5"></label>
+																								@if ($Supporter->access == 'on')
+																									<div class="mb-3 row">
+																										<div class="col-sm-3">دسترسی</div>
+																										<div class="col-sm-9">
+																											<div class="col-xl-4 col-xxl-6 col-6">
+																												<div class="form-check custom-checkbox mb-3 checkbox-warning">
+																													<input type="checkbox" name="access" id="access" class="form-check-input" checked>																											
+																													<label class="form-check-label" for="customCheckBox5"></label>
+																												</div>
 																											</div>
 																										</div>
 																									</div>
-																								</div>
+																								@else
+																									<div class="mb-3 row">
+																										<div class="col-sm-3">دسترسی</div>
+																										<div class="col-sm-9">
+																											<div class="col-xl-4 col-xxl-6 col-6">
+																												<div class="form-check custom-checkbox mb-3 checkbox-warning">
+																													<input type="checkbox" name="access" id="access" class="form-check-input">																											
+																													<label class="form-check-label" for="customCheckBox5"></label>
+																												</div>
+																											</div>
+																										</div>
+																									</div>
+																								@endif
 														
 																								<div class="mb-3 row">
 																									<div class="col-sm-10">
@@ -949,81 +964,6 @@
 															</div>
 														</td>
 													</tr>
-												@else
-													<tr>
-														<td>{{$Supporter->id}}</td>
-														<td>{{$Supporter->name}}</td>
-														<td>{{$Supporter->email}}</td>
-
-														<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-danger">of</a></td>
-														<td>
-															<div class="d-flex">
-																<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="#basicModal"><i class="fa fa-pencil"></i></button>
-																<div class="modal fade" id="basicModal">
-																	<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title">ویرایش پشتیبان</h5>
-																				<button type="button" class="btn-close" data-bs-dismiss="modal">
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<div class="col-xl-12 col-lg-12">
-																					<div class="card-body">
-																						<div class="basic-form">
-																							@include('message')
-																							<form action="{{ url('Admin/updateSupporter') }}" method="POST" enctype="multipart/form-data">
-																								@csrf
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">شماره</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="id" id="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
-																									</div>
-																								</div>
-
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">نام</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="name" id="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">ایمیل</label>
-																									<div class="col-sm-9">
-																										<input type="email" name="email" id="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
-																									</div>
-																								</div>
-																								
-																								<div class="mb-3 row">
-																									<div class="col-sm-3">دسترسی</div>
-																									<div class="col-sm-9">
-																										<div class="col-xl-4 col-xxl-6 col-6">
-																											<div class="form-check custom-checkbox mb-3 checkbox-warning">
-																												<input type="checkbox" name="access" id="access" class="form-check-input">
-																												<label class="form-check-label" for="customCheckBox5"></label>
-																											</div>
-																										</div>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<div class="col-sm-10">
-																										<button type="submit" class="btn btn-primary">ثبت</button>
-																									</div>
-																								</div>
-																							</form>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
-												@endif
                                             @endforeach
                                         </tbody>
                                     </table>

@@ -73,7 +73,7 @@ class AdminController extends Controller
         else {
             $data['message'] = 'کاربر با این ایمیل در سامانه وجود دارد';
 
-            return redirect()->back()->with('error', 'کاربر با این ایمیل در سامانه وجود دارد');
+            // return redirect()->back()->with('error', 'کاربر با این ایمیل در سامانه وجود دارد');
         }
         return view('erorr-success.index', $data);
     }
@@ -95,7 +95,65 @@ class AdminController extends Controller
 
     public function updateSupporter(Request $request)
     {
+        $count = User::where('id', $request->id)->where('email', $request->email)->count();
 
+        $data['url'] = 'Admin/supportertable';
+        if ($count == 0) {
+            $user_count = User::where('email', $request->email)->count();
+            if ($user_count == 1) {
+                $data['status'] = false;
+                $data['message'] = 'کاربر با این ایمیل در سامانه وجود دارد';
+                $data['url'] = 'Admin/supportertable';
+            }
+            else
+            {
+                if (empty($request->access)) 
+                {
+                    $access = 'of';
+                }
+                else 
+                {
+                    $access = $request->access;
+                }
+                $user_update = User::where('id',$request->id)->where('user_type', 2)->update(['email'=>$request->email, 'name'=>$request->name, 'access'=>$access]);
+
+                if ($user_update) 
+                {
+                    $data['status'] = True;
+                    $data['message'] = 'پشتیبان مورد تظر با موفقیت ویرایش شد';
+                }
+                else 
+                {
+                    $data['status'] = False;
+                    $data['message'] = 'خطا در هنگام اجرای عملیات';
+                }
+            }
+        }
+        else 
+        {
+            if (empty($request->access)) 
+            {
+                $access = 'of';
+            }
+            else 
+            {
+                $access = $request->access;
+            }
+            $user_update = User::where('id',$request->id)->where('user_type', 2)->update(['name'=>$request->name, 'access'=>$access]);
+
+            if ($user_update) 
+            {
+                $data['status'] = True;
+                $data['message'] = 'پشتیبان مورد تظر با موفقیت ویرایش شد';
+                $data['url'] = 'Admin/supportertable';
+            }
+            else 
+            {
+                $data['status'] = False;
+                $data['message'] = 'خطا در هنگام اجرای عملیات';
+            }
+        }
+        return view('erorr-success.index', $data);
     }
 
     public function updateShop(Request $request)
