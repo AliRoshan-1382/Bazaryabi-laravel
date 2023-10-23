@@ -71,7 +71,9 @@ class AdminController extends Controller
             $data['url'] = 'Admin/supportertable';
         } 
         else {
+            $data['status'] = false;
             $data['message'] = 'کاربر با این ایمیل در سامانه وجود دارد';
+            $data['url'] = 'Admin/SupporterForm';
 
             // return redirect()->back()->with('error', 'کاربر با این ایمیل در سامانه وجود دارد');
         }
@@ -158,6 +160,6 @@ class AdminController extends Controller
 
     public function updateShop(Request $request)
     {
-        
+        echo 1111;
     }
 }

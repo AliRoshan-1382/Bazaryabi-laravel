@@ -800,8 +800,8 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a class="mm-active" href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
-                            <li><a class="" href="{{ url('Admin/SupporterForm') }}">فرم ثبت محصول</a></li>
-                            <li><a class="" href="{{ url('Admin/SupporterForm') }}">فرم ثبت مشتریان</a></li>
+                            <li><a class="" href="{{ url('Supporter/customerForm') }}">فرم ثبت مشتریان</a></li>
+							<li><a href="{{ url('') }}">فرم ثبت گزارش</a></li>
                         </ul>
                     </li>
 
@@ -824,7 +824,7 @@
                         <li><a href="./page-login.html">عملکرد مشتریان</a></li>
                     </ul>
                     </li>
-
+{{-- 
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-022-copy"></i>
                         <span class="nav-text">تیکت</span>
@@ -834,7 +834,7 @@
                         <li><a href="./page-login.html">تیکت های خوانده نشده</a></li>
                         <li><a href="./page-login.html">تیکت های خوانده شده</a></li>
                     </ul>
-                    </li>
+                    </li> --}}
 
                 </ul>
 				<div class="copyright">

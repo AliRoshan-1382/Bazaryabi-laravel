@@ -23,11 +23,6 @@
 	<link href="{{ url('public/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
     <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
 
-    <link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
-    <!-- Datatable -->
-    <link href="{{ url('public/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <!-- Custom Stylesheet -->
-    <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -599,7 +594,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                پشتیبان ها 
+                                ثبت مشتری 
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -799,23 +794,25 @@
 							</a>
 						</div>
 					</li>
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-072-printer"></i>
 							<span class="nav-text">فرم ها</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="{{ url('Admin/SupporterForm') }}">فرم ثبت پشتیبان</a></li>
+                            <li><a  href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
+                            <li><a class="mm-active" href="{{ url('Supporter/customerForm') }}">فرم ثبت مشتریان</a></li>
+							<li><a  href="{{ url('') }}">فرم ثبت گزارش</a></li>
                         </ul>
                     </li>
 
-                    <li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-043-menu"></i>
                         <span class="nav-text">جداول</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
-                        <li><a class="mm-active" href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
+                        <li><a href="{{ url('Supporter/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="table-datatable-basic.html">مشتریان</a></li>
+                        <li><a href="table-datatable-basic.html">محصولات</a></li>
                     </ul>
                     </li>
 
@@ -827,6 +824,17 @@
                         <li><a href="./page-login.html">عملکرد مشتریان</a></li>
                     </ul>
                     </li>
+{{-- 
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-022-copy"></i>
+                        <span class="nav-text">تیکت</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="./page-login.html">کل تیکت ها</a></li>
+                        <li><a href="./page-login.html">تیکت های خوانده نشده</a></li>
+                        <li><a href="./page-login.html">تیکت های خوانده شده</a></li>
+                    </ul>
+                    </li> --}}
 
                 </ul>
 				<div class="copyright">
@@ -842,112 +850,97 @@
         <!--**********************************
             Content body start
         ***********************************-->
-              <div class="content-body">
+        <div class="content-body">
             <div class="container-fluid">
-				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">جداول</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">فروشگاه ها</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">فرم ها</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">ثبت مشتری</a></li>
 					</ol>
                 </div>
                 <!-- row -->
-
-
                 <div class="row">
-					<div class="col-12">
+					
+					<div class="col-xl-12 col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">جدول اطلاعات</h4>
+                                <h4 class="card-title">ثبت مشتریان</h4>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>شماره</th>
-                                                <th>نام فروشگاه</th>
-                                                <th>ایمیل فروشگاه</th>
-                                                <th>شماره فروشگاه</th>
-                                                {{-- <th>عملیات</th> --}}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($shops as $shop)
-                                                <tr>
-                                                    <td>{{$shop->id}}</td>
-                                                    <td>{{$shop->shop_name}}</td>
-                                                    <td>{{$shop->shop_email}}</td>
-                                                    <td>{{$shop->shop_number}}</td>
-													{{-- <td>
-														<div class="d-flex">
-															<button type="button" class="btn btn-primary shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="{{ '#' . explode('@', $shop->shop_email)[0]}} "><i class="fa fa-pencil"></i></button>
-															<div class="modal fade" id="{{ explode('@', $shop->shop_email)[0] }}">
-																<div class="modal-dialog" role="document">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<h5 class="modal-title">ویرایش فروشگاه</h5>
-																			<button type="button" class="btn-close" data-bs-dismiss="modal">
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<div class="col-xl-12 col-lg-12">
-																				<div class="card-body">
-																					<div class="basic-form">
-																						<form action="{{ url('Admin/updateShop') }}" method="POST">
-																							@csrf
-																							<div class="mb-3 row">
-																								<label class="col-sm-3 col-form-label">شماره</label>
-																								<div class="col-sm-9">
-																									<input type="text" name="id" class="form-control" value="{{ $shop->id }}" placeholder="نام" readonly>
-																								</div>
-																							</div>
+                                <div class="basic-form">
+									@include('message')
+                                    @if (count($shops) == 0)
+                                        <center class="mt-5 p-5">
+                                            <strong>برای ثبت مشتری نخست باید <p><a href="{{ url('Supporter/shopForm') }}">فروشگاه</a></p>اظافه کنید</strong>
+                                        </center>
+                                    @else
+                                        <form action="{{ url('Supporter/customerAdd') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">نام</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="name" id="name" class="form-control" placeholder="نام فروشگاه" required>
+                                                </div>
+                                            </div>
 
-																							<div class="mb-3 row">
-																								<label class="col-sm-3 col-form-label">نام فروشگاه</label>
-																								<div class="col-sm-9">
-																									<input type="text" name="name" class="form-control" value="{{ $shop->shop_name }}" placeholder="نام" required>
-																								</div>
-																							</div>
-													
-																							<div class="mb-3 row">
-																								<label class="col-sm-3 col-form-label">ایمیل فروشگاه</label>
-																								<div class="col-sm-9">
-																									<input type="email" name="email" class="form-control" value="{{ $shop->shop_email }}" placeholder="ایمیل" required>
-																								</div>
-																							</div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">شماره تماس</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="tel" id="tel" minlength="11" maxlength="11"  class="form-control" placeholder="شماره تماس" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">ایمیل</label>
+                                                <div class="col-sm-9">
+                                                    <input type="email" name="email" id="email" class="form-control" placeholder="ایمیل" >
+                                                </div>
+                                            </div>
 
-																							<div class="mb-3 row">
-																								<label class="col-sm-3 col-form-label">تلفن فروشگاه</label>
-																								<div class="col-sm-9">
-																									<input type="tel" name="tel" class="form-control" value="{{ $shop->shop_number }}" placeholder="تلفن همراه" required>
-																								</div>
-																							</div>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">آدرس</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="address" id="address" class="form-control" placeholder="آدرس" required>
+                                                </div>
+                                            </div>
 
-																							<div class="mb-3 row">
-																								<div class="col-sm-10">
-																									<button type="submit" class="btn btn-primary">ثبت</button>
-																								</div>
-																							</div>
-																						</form>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</td> --}}
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">شهر</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="city" id="city" class="form-control" placeholder="شهر" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">استان</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" name="province" id="province" class="form-control" placeholder="استان" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 row">
+                                                <label class="col-sm-3 col-form-label">فروشگاه</label>
+                                                <div class="col-sm-9">
+                                                    <select name="shop" id="shop" class="default-select form-control wide" required>
+                                                        @foreach ($shops as $shop)
+                                                            <option>{{ $shop->shop_name }}</option>
+                                                        @endforeach
+                                                    </select>                                            
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-primary">ثبت</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                    </div>
-				</div>
+					</div>
+                </div>
             </div>
         </div>
     </div>
@@ -965,14 +958,6 @@
     <script src="{{ url('public/js/custom.min.js') }}"></script>
 	<script src="{{ url('public/js/dlabnav-init.js') }}"></script>
 	
-
-    <script src="{{ url('public/vendor/chart.js/Chart.bundle.min.js') }}"></script>
-	<!-- Apex Chart -->
-	<script src="{{ url('public/vendor/apexchart/apexchart.js') }}"></script>
-	
-    <!-- Datatable -->
-    <script src="{{ url('public/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ url('public/js/plugins-init/datatables.init.js') }}"></script>
-
+    
 </body>
 </html>

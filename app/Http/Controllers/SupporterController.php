@@ -34,7 +34,7 @@ class SupporterController extends Controller
 
     public function shopAdd(Request $request)
     {
-        $count = Shop::where('shop_number', $request->tel)->count();
+        $count = Shop::where('shop_name', $request->name)->count();
         if ($count == 0) 
         {
             $email = '';
@@ -55,7 +55,9 @@ class SupporterController extends Controller
         }
         else 
         {
-            return redirect()->back()->with('error', 'فروشگاه با این شماره تلفن در سامانه وجود دارد');
+            $data['status'] = false;
+            $data['message'] = 'فروشگاه با این نام وجود دارد';
+            $data['url'] = 'Supporter/shopForm';
         }
         return view('erorr-success.index', $data);
     }
@@ -66,5 +68,18 @@ class SupporterController extends Controller
         $shops = Shop::all();
 
         return view('Supporter.shoptable', compact('user', 'shops'));
+    }
+
+    public function customerForm()
+    {
+        $user = $this->SupporterDetail();
+        $shops = Shop::all();
+
+        return view('Supporter.CustomerAdderForm', compact('user', 'shops'));
+    }
+
+    public function customerAdd()
+    {
+        
     }
 }
