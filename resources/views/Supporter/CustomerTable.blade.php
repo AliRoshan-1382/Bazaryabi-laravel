@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
+<head>
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="" />
@@ -14,22 +14,15 @@
 	<meta property="og:image" content="https://dompet.dexignlab.com/xhtml/social-image.png" />
 	<meta name="format-detection" content="telephone=no">
 	
-	<title>داشبورد پشتیبان</title>
-	
+	<title>جدول مشتریان</title>
 	<link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
-	
-	<link href="{{ url('public/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ url('public/vendor/nouislider/nouislider.min.css') }}">
-    <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
-
 	<link href="{{ url('public/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
     <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
-
     <link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
     <link href="{{ url('public/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
-	
 </head>
+
 <body>
     <div id="preloader">
         <div class="waviy">
@@ -46,7 +39,7 @@
 		</div>
     </div>
     <div id="main-wrapper">
-        <div class="nav-header">
+       <div class="nav-header">
             <a href="{{ url('') }}" class="brand-logo">
 				<svg class="logo-abbr" width="53" height="53" viewBox="0 0 53 53">
 					<path d="M21.6348 8.04782C21.6348 5.1939 23.9566 2.87204 26.8105 2.87204H28.6018L28.0614 1.37003C27.7576 0.525342 26.9616 0 26.1132 0C25.8781 0 25.639 0.0403711 25.4052 0.125461L7.3052 6.7133C6.22916 7.105 5.67535 8.29574 6.06933 9.37096L7.02571 11.9814H21.6348V8.04782Z" fill="#759DD9"/>
@@ -71,18 +64,12 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                داشبورد پشتیبان 
+                                مشتری ها                            
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item">
-								<a href="{{ url('Supporter/shopForm') }}">
-									<button type="button" class="btn btn-rounded btn-outline-{{ $color[rand(0,7 )] }}">ثبت فروشگاه</button>
-								</a>
-							</li>
-
-                            <li class="nav-item">
-								<a href="{{ url('Supporter/customerForm') }}" >
+								<a href="{{ url('Supporter/customerForm') }}">
 									<button type="button" class="btn btn-rounded btn-outline-{{ $color[rand(0,7 )] }}">ثبت مشتری</button>
 								</a>
 							</li>
@@ -91,7 +78,6 @@
 				</nav>
 			</div>
 		</div>
-
         <div class="dlabnav">
             <div class="dlabnav-scroll">
 				<ul class="metismenu" id="menu">
@@ -125,13 +111,13 @@
                         </ul>
                     </li>
 
-                    <li ><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-043-menu"></i>
                         <span class="nav-text">جداول</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a  href="{{ url('Supporter/shoptable') }}">فروشگاه ها</a></li>
-                        <li><a  href="{{ url('Supporter/customerTable') }}">مشتریان</a></li>
+                        <li><a class="mm-active" href="{{ url('Supporter/customerTable') }}">مشتریان</a></li>
                     </ul>
                     </li>
 
@@ -143,6 +129,7 @@
                         <li><a href="./page-login.html">عملکرد مشتریان</a></li>
                     </ul>
                     </li>
+
                 </ul>
 				<div class="copyright">
 					<p><strong>This Project Made with <a href="https://github.com/AliRoshan-1382">Ali Roshan</a></strong></p>
@@ -150,12 +137,21 @@
 				</div>
 			</div>
         </div>
-
         <div class="content-body">
-			<div class="container-fluid">
-				<div class="row">
+            <div class="container-fluid">
+				
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">جداول</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">مشتری ها</a></li>
+					</ol>
+                </div>
+                <div class="row">
 					<div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">جدول اطلاعات</h4>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example3" class="display" style="min-width: 845px">
@@ -165,61 +161,39 @@
                                                 <th>نام</th>
                                                 <th>ایمیل</th>
                                                 <th>شماره تلفن</th>
-                                                <th>استان</th>
+                                                <th>آدرس</th>
                                                 <th>شهر</th>
+                                                <th>استان</th>
                                                 <th>فروشگاه</th>
+                                                <th>تاریخ ثبت</th>
+                                                <th>زمان ثبت</th>
+                                                <th>عملیات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             @foreach ($customers as $customer)
                                                 <tr>
-                                                    <td><a href="javascript:void(0)" class="badge badge-{{ $color[rand(0,7 )] }}">{{ $customer->id }}</a></td>
+                                                    <td><a href="javascript:void(0)" class="badge badge-{{ $color[rand(0,7)] }}">{{ $customer->id }}</a></td>
                                                     <td>{{$customer->customer_name}}</td>
-													@if($customer->customer_email == '')
+
+                                                    @if($customer->customer_email == '')
                                                     	<td><span class="badge light badge-{{ $color[rand(0,7 )] }}">ندارد</span></td>
 													@else
                                                     	<td>{{$customer->customer_email}}</td>
 													@endif
 
                                                     <td>{{$customer->customer_phone}}</td>
-                                                    <td>{{$customer->customer_province}}</td>
+                                                    <td>{{$customer->customer_address}}</td>
                                                     <td>{{$customer->customer_city}}</td>
+                                                    <td>{{$customer->customer_province}}</td>
                                                     <td>{{$customer->customer_shop}}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example3" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>شماره</th>
-                                                <th>نام فروشگاه</th>
-                                                <th>ایمیل فروشگاه</th>
-                                                <th>شماره فروشگاه</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($shops as $shop)
-                                                <tr>
-                                                    <td><a href="javascript:void(0)" class="badge badge-{{ $color[rand(0,7 )] }}">{{ $shop->id }}</a></td>
-                                                    <td>{{$shop->shop_name}}</td>
-
-                                                    @if($shop->shop_email == '')
-                                                    	<td><span class="badge light badge-{{ $color[rand(0,7 )] }}">ندارد</span></td>
-													@else
-                                                    	<td>{{$shop->shop_email}}</td>
-													@endif
-
-                                                    <td>{{$shop->shop_number}}</td>
+                                                    <td>{{$customer->submit_date}}</td>
+                                                    <td>{{$customer->submit_time}}</td>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <a href="#" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -231,19 +205,21 @@
 				</div>
             </div>
         </div>
-	</div>
+    </div>
     <script src="{{ url('public/vendor/global/global.min.js') }}"></script>
-	<script src="{{ url('public/vendor/chart.js/Chart.bundle.min.js') }}"></script>
 	<script src="{{ url('public/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
-	<script src="{{ url('public/vendor/apexchart/apexchart.js') }}"></script>
-	<script src="{{ url('public/vendor/nouislider/nouislider.min.js') }}"></script>
-	<script src="{{ url('public/vendor/wnumb/wNumb.js') }}"></script>
-	<script src="{{ url('public/js/dashboard/dashboard-1.js') }}"></script>
+	
     <script src="{{ url('public/js/custom.min.js') }}"></script>
 	<script src="{{ url('public/js/dlabnav-init.js') }}"></script>
+	
+
+    <script src="{{ url('public/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+	<script src="{{ url('public/vendor/apexchart/apexchart.js') }}"></script>
+	
     <script src="{{ url('public/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('public/js/plugins-init/datatables.init.js') }}"></script>
+
+
     
-	
 </body>
 </html>

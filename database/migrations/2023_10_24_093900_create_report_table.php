@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('shop_name')->index()->unique();
-            $table->string('shop_number', 11);
-            $table->string('shop_email')->nullable();
+        Schema::create('report', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop');
+        Schema::dropIfExists('report');
     }
 };

@@ -40,7 +40,9 @@ Route::group(['middleware' => 'supporter'], function () {
     Route::post('Supporter/shopAdd', [SupporterController::class, 'shopAdd']); // ثبت فروشگاه ها
     Route::get('Supporter/shoptable', [SupporterController::class, 'shoptable']); // جدول فروشگاه ها
     Route::get('Supporter/customerForm', [SupporterController::class, 'customerForm']); // فرم ثبت مشتری
-    Route::get('Supporter/customerAdd', [SupporterController::class, 'customerAdd']); // ثبت مشتری
+    Route::post('Supporter/customerAdd', [SupporterController::class, 'customerAdd']); // ثبت مشتری
+    Route::get('Supporter/customerTable', [SupporterController::class, 'customerTable']); // جدول مشتری
+
     ;}
 );
 

@@ -21,8 +21,10 @@ class AdminController extends Controller
 
     public function Dashboard(){
         $user = $this->adminDetail();
+        $shop_count = Shop::count();
+        $customer_count = Shop::count();
 
-        return view('Dashboard.Dashboard', compact('user'));
+        return view('Dashboard.Dashboard', compact('user', 'shop_count', 'customer_count'));
     }
 
     public function SupporterForm()

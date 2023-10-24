@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-
+use Morilog\Jalali\JalaliServiceProvider;
 return [
 
     /*
@@ -183,6 +183,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // 'jDate' => Morilog\Jalali\Facades\jDate,
+        // 'jDateTime' => Morilog\Jalali\Facades\jDateTime,
     ])->toArray(),
 
 ];
