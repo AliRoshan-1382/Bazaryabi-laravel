@@ -42,6 +42,7 @@ Route::group(['middleware' => 'supporter'], function () {
     Route::get('Supporter/customerForm', [SupporterController::class, 'customerForm']); // فرم ثبت مشتری
     Route::post('Supporter/customerAdd', [SupporterController::class, 'customerAdd']); // ثبت مشتری
     Route::get('Supporter/customerTable', [SupporterController::class, 'customerTable']); // جدول مشتری
+    Route::get('Supporter/reportForm', [SupporterController::class, 'reportForm']); //  فرم ثبت گزارش
 
     ;}
 );

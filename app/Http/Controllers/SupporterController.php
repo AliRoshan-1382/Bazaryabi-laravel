@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 
 
 class SupporterController extends Controller
@@ -23,7 +24,8 @@ class SupporterController extends Controller
 
     public function Dashboard(){
         $user = $this->SupporterDetail();
-        $customers = Customer::all();
+        $ُShopNames = Shop::where('shop_access', 'on')->pluck('shop_name');
+        $customers = Customer::whereIn('customer_shop', $ُShopNames)->get();
         $shops = Shop::all();
 	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
@@ -51,13 +53,14 @@ class SupporterController extends Controller
             $shop->shop_name = $request->name;
             $shop->shop_number = $request->tel;
             $shop->shop_email = $email;
+            $shop->shop_access = 'on';
 
             $shop->save();
 
             $data['status'] = true;
             $data['message'] = 'فروشگاه با موفقیت ثبت شد';
 
-            $data['url'] = 'Supporter/shoptable';
+            $data['url'] = '';
         }
         else 
         {
@@ -90,7 +93,6 @@ class SupporterController extends Controller
     {
         $customer_count = Customer::where('customer_phone', $request->tel)->where('customer_shop', $request->shop)->count();
 
-        $data['url'] = 'Supporter/customerTable';
         if ($customer_count == 0) 
         {
             $email = '';
@@ -118,11 +120,13 @@ class SupporterController extends Controller
             {
                 $data['status'] = true;
                 $data['message'] = 'مشتری مورد نظر با موفقیت ثبت شد';
+                $data['url'] = 'Supporter/customerTable';
             } 
             else 
             {
                 $data['status'] = false;
                 $data['message'] = 'مشکلی پیش آمده است';
+                $data['url'] = 'Supporter/customerTable';
             }
 
         }
@@ -130,15 +134,29 @@ class SupporterController extends Controller
         {
             $data['status'] = false;
             $data['message'] = 'مشتری با این شماره تلفن در فروشگاه مورد نظر قبلا ثبت شده است';
+            $data['url'] = 'Supporter/customerTable';
         }
         return view('erorr-success.index', $data);
     }
 
     public function customerTable(){
         $user = $this->SupporterDetail();
-        $customers = Customer::all();
+        $ُShopNames = Shop::where('shop_access', 'on')->pluck('shop_name');
+        $customers = Customer::whereIn('customer_shop', $ُShopNames)->get();
+
         $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
         return view('Supporter.CustomerTable', compact('user', 'customers', 'color'));
+    }
+
+    public function reportForm()
+    {
+        $user = $this->SupporterDetail();
+        $ُShopNames = Shop::where('shop_access', 'on')->pluck('shop_name');
+        $customers = Customer::whereIn('customer_shop', $ُShopNames)->get();
+
+        $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+
+        return view('Supporter.reportForm', compact('user', 'customers', 'color'));
     }
 }

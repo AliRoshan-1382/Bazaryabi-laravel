@@ -16,13 +16,11 @@ return new class extends Migration
             $table->string('shop_name')->index()->unique();
             $table->string('shop_number', 11);
             $table->string('shop_email')->nullable();
+            $table->string('shop_access')->default('on');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('shop');

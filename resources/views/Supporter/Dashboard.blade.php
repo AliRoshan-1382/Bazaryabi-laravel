@@ -121,7 +121,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
                             <li><a href="{{ url('Supporter/customerForm') }}">فرم ثبت مشتریان</a></li>
-							<li><a href="{{ url('') }}">فرم ثبت گزارش</a></li>
+							<li><a href="{{ url('Supporter/reportForm') }}">فرم ثبت گزارش</a></li>
                         </ul>
                     </li>
 
@@ -156,6 +156,9 @@
 				<div class="row">
 					<div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">جدول مشتری ها</h4>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example3" class="display" style="min-width: 845px">
@@ -196,6 +199,9 @@
                     </div>
 					<div class="col-12">
                         <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">جدول فروشگاه ها</h4>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="example3" class="display" style="min-width: 845px">
@@ -205,6 +211,7 @@
                                                 <th>نام فروشگاه</th>
                                                 <th>ایمیل فروشگاه</th>
                                                 <th>شماره فروشگاه</th>
+                                                <th>وضعیت فروشگاه</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -214,12 +221,18 @@
                                                     <td>{{$shop->shop_name}}</td>
 
                                                     @if($shop->shop_email == '')
-                                                    	<td><span class="badge light badge-{{ $color[rand(0,7 )] }}">ندارد</span></td>
+                                                    	<td><span class="badge light badge-danger">ندارد</span></td>
 													@else
                                                     	<td>{{$shop->shop_email}}</td>
 													@endif
 
                                                     <td>{{$shop->shop_number}}</td>
+
+                                                    @if($shop->shop_access == 'of')
+                                                        <td><span class="badge light badge-danger">غیر فعال</span></td>
+                                                    @else
+                                                        <td><span class="badge light badge-success">فعال</span></td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>

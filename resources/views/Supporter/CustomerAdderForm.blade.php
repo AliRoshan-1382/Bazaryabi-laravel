@@ -107,7 +107,7 @@
                         <ul aria-expanded="false">
                             <li><a  href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
                             <li><a class="mm-active" href="{{ url('Supporter/customerForm') }}">فرم ثبت مشتریان</a></li>
-							<li><a  href="{{ url('') }}">فرم ثبت گزارش</a></li>
+							<li><a  href="{{ url('Supporter/reportForm') }}">فرم ثبت گزارش</a></li>
                         </ul>
                     </li>
 

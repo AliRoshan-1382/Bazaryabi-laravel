@@ -110,7 +110,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{ url('Supporter/shopForm') }}">فرم ثبت فروشگاه ها</a></li>
                             <li><a href="{{ url('Supporter/customerForm') }}">فرم ثبت مشتریان</a></li>
-							<li><a href="{{ url('') }}">فرم ثبت گزارش</a></li>
+							<li><a href="{{ url('Supporter/reportForm') }}">فرم ثبت گزارش</a></li>
                         </ul>
                     </li>
 
@@ -164,6 +164,7 @@
                                                 <th>نام فروشگاه</th>
                                                 <th>ایمیل فروشگاه</th>
                                                 <th>شماره فروشگاه</th>
+                                                <th>وضعیت فروشگاه</th>
                                                 <th>عملیات</th>
                                             </tr>
                                         </thead>
@@ -174,12 +175,18 @@
                                                     <td>{{$shop->shop_name}}</td>
                                                     
                                                     @if($shop->shop_email == '')
-                                                    	<td><span class="badge light badge-{{ $color[rand(0,7 )] }}">ندارد</span></td>
+                                                    	<td><span class="badge light badge-danger">ندارد</span></td>
 													@else
                                                     	<td>{{$shop->shop_email}}</td>
 													@endif
 
                                                     <td>{{$shop->shop_number}}</td>
+
+                                                    @if($shop->shop_access == 'of')
+                                                        <td><span class="badge light badge-danger">غیر فعال</span></td>
+                                                    @else
+                                                        <td><span class="badge light badge-success">فعال</span></td>
+                                                    @endif
                                                     <td>
                                                         <div class="d-flex">
                                                             <a href="#" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
