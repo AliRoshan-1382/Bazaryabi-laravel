@@ -42,6 +42,8 @@ Route::group(['middleware' => 'supporter'], function () {
     Route::get('Supporter/customerForm', [SupporterController::class, 'customerForm']); // فرم ثبت مشتری
     Route::post('Supporter/customerAdd', [SupporterController::class, 'customerAdd']); // ثبت مشتری
     Route::get('Supporter/customerTable', [SupporterController::class, 'customerTable']); // جدول مشتری
+    Route::post('Supporter/shopedit', [SupporterController::class, 'shopedit']); // ادیت فروشگاه
+    Route::post('Supporter/customeredit', [SupporterController::class, 'customeredit']); // ادیت فروشگاه
     Route::get('Supporter/reportForm', [SupporterController::class, 'reportForm']); //  فرم ثبت گزارش
 
     ;}

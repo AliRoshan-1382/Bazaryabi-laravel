@@ -599,7 +599,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                پشتیبان ها 
+                                فروشگاه ها 
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
@@ -842,7 +842,7 @@
         <!--**********************************
             Content body start
         ***********************************-->
-              <div class="content-body">
+    <div class="content-body">
             <div class="container-fluid">
 				
 				<div class="row page-titles">

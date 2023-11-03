@@ -123,16 +123,6 @@
                         <li><a href="{{ url('Supporter/customerTable') }}">مشتریان</a></li>
                     </ul>
                     </li>
-
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-022-copy"></i>
-                        <span class="nav-text">گزارش ها</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="./page-login.html">عملکرد مشتریان</a></li>
-                    </ul>
-                    </li>
-
                 </ul>
 				<div class="copyright">
 					<p><strong>This Project Made with <a href="https://github.com/AliRoshan-1382">Ali Roshan</a></strong></p>
@@ -189,7 +179,88 @@
                                                     @endif
                                                     <td>
                                                         <div class="d-flex">
-                                                            <a href="#" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                            <button type="button" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="{{ '#' . trim(str_replace(" ", "", $shop->shop_name))}} "><i class="fa fa-pencil"></i></button>
+                                                            <div class="modal fade" id="{{ trim(str_replace(" ", "", $shop->shop_name)) }}">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">ویرایش فروشگاه</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xl-12 col-lg-12">
+                                                                                <div class="card-body">
+                                                                                    <div class="basic-form">
+                                                                                        <form action="{{ url('Supporter/shopedit') }}" method="POST">
+                                                                                            @csrf
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">شماره</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text" name="id" class="form-control" value="{{ $shop->id }}" placeholder="نام" readonly>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">شماره تماس</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text" name="tel" class="form-control" value="{{ $shop->shop_number }}" placeholder="نام" required>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">نام</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text" name="name" class="form-control" value="{{ $shop->shop_name }}" placeholder="نام" required>
+                                                                                                </div>
+                                                                                            </div>
+                                                    
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">ایمیل</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="email" name="email" class="form-control" value="{{ $shop->shop_email }}" placeholder="ایمیل">
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                            @if ($shop->shop_access == 'on')
+                                                                                                <div class="mb-3 row">
+                                                                                                    <div class="col-sm-3">وضعیت فروشگاه</div>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                                            <div class="form-check custom-checkbox mb-3 checkbox-{{ $color[rand(0,7 )] }}">
+                                                                                                                <input type="checkbox" name="access" id="access" class="form-check-input" checked>																											
+                                                                                                                <label class="form-check-label" for="customCheckBox5"></label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @else
+                                                                                                <div class="mb-3 row">
+                                                                                                    <div class="col-sm-3">وضعیت فروشگاه</div>
+                                                                                                    <div class="col-sm-9">
+                                                                                                        <div class="col-xl-4 col-xxl-6 col-6">
+                                                                                                            <div class="form-check custom-checkbox mb-3 checkbox-{{ $color[rand(0,7 )] }}">
+                                                                                                                <input type="checkbox" name="access" id="access" class="form-check-input">																											
+                                                                                                                <label class="form-check-label" for="customCheckBox5"></label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
+                                                    
+                                                                                            <div class="mb-3 row">
+                                                                                                <div class="col-sm-10">
+                                                                                                    <button type="submit" class="btn btn-{{ $color[rand(0,7 )] }}">ثبت</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>

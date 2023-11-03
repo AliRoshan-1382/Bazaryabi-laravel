@@ -120,15 +120,6 @@
                         <li><a href="{{ url('Supporter/customerTable') }}">مشتریان</a></li>
                     </ul>
                     </li>
-
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-022-copy"></i>
-                        <span class="nav-text">گزارش ها</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="./page-login.html">عملکرد مشتریان</a></li>
-                    </ul>
-                    </li>
                 </ul>
 				<div class="copyright">
 					<p><strong>This Project Made with <a href="https://github.com/AliRoshan-1382">Ali Roshan</a></strong></p>
