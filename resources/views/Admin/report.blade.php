@@ -15,7 +15,7 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>جدول پشتیبان ها</title>
+	<title>جدول گزارشات</title>
 	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="{{ url('public/images/favicon.png') }}" />
@@ -28,6 +28,8 @@
     <link href="{{ url('public/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <!-- Custom Stylesheet -->
     <link href="{{ url('public/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url('public/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -81,51 +83,21 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-		
-		<!--**********************************
-            Chat box start
-        ***********************************-->
-		<!--**********************************
-            Chat box End
-        ***********************************-->
 
-
-		
-		
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-								 پشتیبان ها
+                                گزارشات
                             </div>
                         </div>
-                        <ul class="navbar-nav header-right">
-                            <li class="nav-item">
-								<a href="{{ url('Admin/SupporterForm') }}">
-									<button type="button" class="btn btn-rounded btn-outline-{{ $color[rand(0,7 )] }}">ثبت پشتیبان</button>
-								</a>
-							</li>
-                        </ul>
                     </div>
 				</nav>
 			</div>
 		</div>
-                    
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="dlabnav">
             <div class="dlabnav-scroll">
 				<ul class="metismenu" id="menu">
@@ -157,23 +129,23 @@
                         </ul>
                     </li>
 
-                    <li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-043-menu"></i>
                         <span class="nav-text">جداول</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a class="mm-active" href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
+                        <li><a href="{{ url('Admin/supportertable') }}">پشتیبان ها</a></li>
                         <li><a href="{{ url('Admin/shoptable') }}">فروشگاه ها</a></li>
                         <li><a href="{{ url('Admin/CustomerTable') }}">مشتریان</a></li>
                     </ul>
                     </li>
 
-                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <li class="mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-022-copy"></i>
                         <span class="nav-text">گزارش ها</span>
                     </a>
                     <ul aria-expanded="false">
-                        <li><a href="{{ url('Admin/ReportTable') }}">عملکرد مشتریان</a></li>
+                        <li><a class="mm-active" href="{{ url('Admin/ReportTable') }}">عملکرد مشتریان</a></li>
                     </ul>
                     </li>
 
@@ -191,13 +163,13 @@
         <!--**********************************
             Content body start
         ***********************************-->
-    	<div class="content-body">
+    <div class="content-body">
             <div class="container-fluid">
 				
 				<div class="row page-titles">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">جداول</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">پشتیبان ها</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">گزارش ها</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">عملکرد مشتریان</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -207,7 +179,7 @@
 					<div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">جدول اطلاعات</h4>
+                                <h4 class="card-title">جدول گزارشات</h4>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -215,104 +187,41 @@
                                         <thead>
                                             <tr>
                                                 <th>شماره</th>
-                                                <th>نام</th>
+                                                <th>نام مشتری</th>
+                                                <th>آیدی مشتری</th>
+                                                <th>شماره مشتری</th>
+                                                <th>فروشگاه</th>
                                                 <th>ایمیل</th>
-                                                <th>دسترسی</th>
-                                                <th>عملیات</th>
+                                                <th>گزارش مشتری</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($Supporters as $Supporter)
-													<tr>
-														<td><a href="javascript:void(0)" class="badge badge-{{ $color[rand(0,7 )] }}">{{ $Supporter->id }}</a></td>
-														<td>{{$Supporter->name}}</td>
-														<td>{{$Supporter->email}}</td>
-														@if ($Supporter->access == 'on')
-															<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-{{ $color[rand(0,7 )] }}">on</a></td>
-														@else
-															<td><a href="javascript:void(0)" class="badge badge-rounded badge-outline-{{ $color[rand(0,7 )] }}">of</a></td>
-														@endif
-
-														<td>
-															<div class="d-flex">
-																<button type="button" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="{{ '#' . explode('@', $Supporter->email)[0]}} "><i class="fa fa-pencil"></i></button>
-																<div class="modal fade" id="{{ explode('@', $Supporter->email)[0] }}">
-																	<div class="modal-dialog" role="document">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title">ویرایش پشتیبان</h5>
-																				<button type="button" class="btn-close" data-bs-dismiss="modal">
-																				</button>
-																			</div>
-																			<div class="modal-body">
-																				<div class="col-xl-12 col-lg-12">
-																					<div class="card-body">
-																						<div class="basic-form">
-																							<form action="{{ url('Admin/updateSupporter') }}" method="POST">
-																								@csrf
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">شماره</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="id" class="form-control" value="{{ $Supporter->id }}" placeholder="نام" readonly>
-																									</div>
-																								</div>
-
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">نام</label>
-																									<div class="col-sm-9">
-																										<input type="text" name="name" class="form-control" value="{{ $Supporter->name }}" placeholder="نام" required>
-																									</div>
-																								</div>
-														
-																								<div class="mb-3 row">
-																									<label class="col-sm-3 col-form-label">ایمیل</label>
-																									<div class="col-sm-9">
-																										<input type="email" name="email" class="form-control" value="{{ $Supporter->email }}" placeholder="ایمیل" required>
-																									</div>
-																								</div>
-																								
-																								@if ($Supporter->access == 'on')
-																									<div class="mb-3 row">
-																										<div class="col-sm-3">دسترسی</div>
-																										<div class="col-sm-9">
-																											<div class="col-xl-4 col-xxl-6 col-6">
-																												<div class="form-check custom-checkbox mb-3 checkbox-{{ $color[rand(0,7 )] }}">
-																													<input type="checkbox" name="access" id="access" class="form-check-input" checked>																											
-																													<label class="form-check-label" for="customCheckBox5"></label>
-																												</div>
-																											</div>
-																										</div>
-																									</div>
-																								@else
-																									<div class="mb-3 row">
-																										<div class="col-sm-3">دسترسی</div>
-																										<div class="col-sm-9">
-																											<div class="col-xl-4 col-xxl-6 col-6">
-																												<div class="form-check custom-checkbox mb-3 checkbox-{{ $color[rand(0,7 )] }}">
-																													<input type="checkbox" name="access" id="access" class="form-check-input">																											
-																													<label class="form-check-label" for="customCheckBox5"></label>
-																												</div>
-																											</div>
-																										</div>
-																									</div>
-																								@endif
-														
-																								<div class="mb-3 row">
-																									<div class="col-sm-10">
-																										<button type="submit" class="btn btn-{{ $color[rand(0,7 )] }}">ثبت</button>
-																									</div>
-																								</div>
-																							</form>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</td>
-													</tr>
+                                            @foreach ($report as $report)
+                                                <tr>
+													<td><a href="javascript:void(0)" class="badge badge-{{ $color[rand(0,7 )] }}">{{ $report->id }}</a></td>
+                                                    <td>{{$report->customer_name}}</td>
+                                                    <td>{{$report->customer_id}}</td>
+                                                    <td>{{$report->customer_phone}}</td>
+                                                    <td>{{$report->customer_shop}}</td>
+                                                    <td>{{$report->customer_email}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-{{ $color[rand(0,7 )] }} mb-2" data-bs-toggle="modal" data-bs-target="{{ '.' . explode('@', $report->customer_email)[0] . $report->id}}">دیدن گزارش</button>
+                                                        <div class="modal fade {{ explode('@', $report->customer_email)[0] . $report->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">{{$report->report_text}}</div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-{{ $color[rand(0,7 )] }} light" data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -346,8 +255,9 @@
     <!-- Datatable -->
     <script src="{{ url('public/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('public/js/plugins-init/datatables.init.js') }}"></script>
+    <script src="{{ url('public/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ url('public/js/plugins-init/sweetalert.init.js') }}"></script>
 
 
-    
 </body>
 </html>

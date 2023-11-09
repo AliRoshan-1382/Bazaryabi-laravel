@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('report', function (Blueprint $table) {
             $table->id();
+            $table->string('customer_name', 100);
+            $table->string('customer_id', 250);
+            $table->string('customer_phone', 12);
+
+            $table->string('customer_shop', 100)->index();
+            $table->foreign('customer_shop')->references('shop_name')->on('shop')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->string('customer_email', 100);
+            $table->string('report_text', 15000);
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\User;
+use App\Models\report;
 use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
@@ -289,5 +290,43 @@ class SupporterController extends Controller
             }
         }
         return view('erorr-success.index', $data);
+    }
+
+    public function Addreport(Request $request)
+    {
+        $customer_count = Customer::where('id', $request->id)->count();
+
+        if ($customer_count == 1) 
+        {
+           $customer_details = Customer::where('id', $request->id)->get()[0];
+
+           $report = new report;
+           $report->customer_name = $customer_details['customer_name'];
+           $report->customer_id = $request->id;
+           $report->customer_phone = $customer_details['customer_phone'];
+           $report->customer_shop = $request->shop;
+           $report->customer_email = $customer_details['customer_email'];
+           $report->report_text = $request->report;
+
+           $save = $report->save();
+            if ($save) 
+            {
+                $data['status'] = True;
+                $data['message'] = 'گزارش مورد تظر با موفقیت ثبت شد';
+                $data['url'] = 'Supporter/reportForm';           
+            } 
+            else 
+            {
+                $data['status'] = False;
+                $data['message'] = 'خطا در هنگام اجرای عملیات';
+            }
+           
+        }
+        else
+        {
+            $data['status'] = False;
+            $data['message'] = 'خطا در هنگام اجرای عملیات';
+        }
+        return view('erorr-success.index', $data);        
     }
 }

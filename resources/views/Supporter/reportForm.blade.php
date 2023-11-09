@@ -70,13 +70,13 @@
                                 ثبت گزارش                            
                             </div>
                         </div>
-                        <ul class="navbar-nav header-right">
+                        {{-- <ul class="navbar-nav header-right">
                             <li class="nav-item">
 								<a href="{{ url('Supporter/shopForm') }}">
 									<button type="button" class="btn btn-rounded btn-outline-{{ $color[rand(0,7 )] }}">جدول گزارشات</button>
 								</a>
 							</li>
-                        </ul>
+                        </ul> --}}
                     </div>
 				</nav>
 			</div>
@@ -158,8 +158,6 @@
                                                 <th>شهر</th>
                                                 <th>استان</th>
                                                 <th>فروشگاه</th>
-                                                <th>تاریخ ثبت</th>
-                                                <th>زمان ثبت</th>
                                                 <th>عملیات</th>
                                             </tr>
                                         </thead>
@@ -180,11 +178,56 @@
                                                     <td>{{$customer->customer_city}}</td>
                                                     <td>{{$customer->customer_province}}</td>
                                                     <td>{{$customer->customer_shop}}</td>
-                                                    <td>{{$customer->submit_date}}</td>
-                                                    <td>{{$customer->submit_time}}</td>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <a href="#" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                            <button type="button" class="btn btn-{{ $color[rand(0,7 )] }} shadow btn-xs sharp me-1" data-bs-toggle="modal" data-bs-target="{{ '#' .  'a' . $customer->customer_phone . trim(str_replace(" ", "", $customer->customer_shop))}} "><i class="fa fa-pencil"></i></button>
+                                                            <div class="modal fade" id="{{ 'a' . $customer->customer_phone . trim(str_replace(" ", "", $customer->customer_shop))}}">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">ثبت گزارش</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="col-xl-12 col-lg-12">
+                                                                                <div class="card-body">
+                                                                                    <div class="basic-form">
+                                                                                        <form action="{{ url('Supporter/Addreport') }}" method="POST">
+                                                                                            @csrf
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">شماره</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text" name="id" class="form-control" value="{{ $customer->id }}" placeholder="نام" readonly>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="mb-3 row">
+                                                                                                <label class="col-sm-3 col-form-label">فروشگاه</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <input type="text" name="shop" class="form-control" value="{{ $customer->customer_shop }}" placeholder="نام" readonly>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="mb-3 row">
+                                                                                                <label for="w3review" class="col-sm-3 col-form-label">متن گزارش</label>
+                                                                                                <div class="col-sm-9">
+                                                                                                    <textarea id="w3review" name="report" class="form-control" placeholder="متن گزارش خود را بنویسید" required></textarea>                                                                                                </div>
+                                                                                            </div>
+                                                    
+                                                                                            <div class="mb-3 row">
+                                                                                                <div class="col-sm-10">
+                                                                                                    <button type="submit" class="btn btn-{{ $color[rand(0,7 )] }}">ثبت</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>

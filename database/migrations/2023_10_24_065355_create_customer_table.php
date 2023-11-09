@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('customer_city', 250);
             $table->string('customer_province', 250);
             $table->string('customer_shop', 100)->index();
-            $table->foreign('customer_shop', 250)->references('shop_name')->on('shop')->onDelete('cascade')->onUpdate('cascade');;
+            $table->foreign('customer_shop', 250)->references('shop_name')->on('shop')->onDelete('cascade')->onUpdate('cascade');
             $table->string('submit_date', 250);
             $table->string('submit_time', 250);
             $table->timestamps();

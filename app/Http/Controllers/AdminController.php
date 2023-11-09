@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
 use App\Models\Shop;
+use App\Models\report;
 use Hash;
+use App\Models\Customer;
 class AdminController extends Controller
 {
     public function adminDetail()
@@ -23,15 +25,21 @@ class AdminController extends Controller
         $user = $this->adminDetail();
         $shop_count = Shop::count();
         $customer_count = Shop::count();
+        $ُShopNames = Shop::where('shop_access', 'on')->pluck('shop_name');
+        $helper = user::where('user_type', '2')->get();
+        $customers = Customer::whereIn('customer_shop', $ُShopNames)->get();
+        $shops = Shop::all();
+	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-        return view('Dashboard.Dashboard', compact('user', 'shop_count', 'customer_count'));
+        return view('Dashboard.Dashboard', compact('user', 'customers', 'shop_count', 'customer_count' , 'shops', 'color', 'helper'));
     }
 
     public function SupporterForm()
     {
         $user = $this->adminDetail();
+	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-        return view('Admin.supporterform', compact('user'));
+        return view('Admin.supporterform', compact('user', 'color'));
     }
 
     public function AddSupporter(Request $request){
@@ -85,16 +93,19 @@ class AdminController extends Controller
     public function supportertable(){
         $user = $this->adminDetail();
         $Supporters = User::where('user_type', 2)->get();
+	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
 
-        return view('Admin.supportertable', compact('user', 'Supporters'));
+        return view('Admin.supportertable', compact('user', 'Supporters', 'color'));
     }
 
     public function shoptable()
     {
+        $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+
         $user = $this->adminDetail();
         $shops = Shop::all();
 
-        return view('Admin.shoptable', compact('user', 'shops'));
+        return view('Admin.shoptable', compact('user', 'shops', 'color'));
     }
 
     public function updateSupporter(Request $request)
@@ -160,8 +171,21 @@ class AdminController extends Controller
         return view('erorr-success.index', $data);
     }
 
-    public function updateShop(Request $request)
+    public function CustomerTable()
     {
-        echo 1111;
+        $user = $this->adminDetail();
+	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+        $customers = Customer::all();
+
+        return view('Admin.customertable', compact('user', 'color', 'customers'));
+    }
+
+    public function ReportTable()
+    {
+        $user = $this->adminDetail();
+	    $color = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+        $report = report::all();
+
+        return view('Admin.report', compact('user', 'color', 'report'));
     }
 }
